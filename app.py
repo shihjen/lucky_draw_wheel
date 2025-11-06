@@ -10,6 +10,8 @@ import numpy as np
 # --- Streamlit Page Configuration ---
 st.set_page_config(page_title="Lucky Draw Wheel", layout="wide")
 st.title("🎡 NUP SAS Day 2025 Lucky Draw")
+st.audio("Walen - Gameboy (freetouse.com).mp3", format="audio/mpeg", autoplay=True, loop=True, width=200)
+
 
 # --- Initialize Session States ---
 if "attendees" not in st.session_state:
@@ -40,6 +42,7 @@ if st.sidebar.button("Load Attendees"):
     st.session_state.remaining = names.copy()
     st.session_state.winners = []  # reset winners when reload
     st.sidebar.success(f"Loaded {len(names)} attendees!")
+    
 
 # --- Draw Wheel Function ---
 def draw_wheel(names, rotation=0, show_labels=True):
