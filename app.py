@@ -110,7 +110,10 @@ if st.session_state.show_popup and st.session_state.winner:
         img_base64 = base64.b64encode(img_bytes).decode()
         image_html = f'<img src="data:image/png;base64,{img_base64}" width="250" style="border-radius:15px;margin-top:10px;">'
     else:
-        image_html = '<img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Confetti.svg" width="250" style="border-radius:15px;margin-top:10px;">'
+        with open("default_img.png", "rb") as f:
+            img_bytes = f.read()
+            img_base64 = base64.b64encode(img_bytes).decode()
+            image_html = f'<img src="data:image/png;base64,{img_base64}" width="250" style="border-radius:15px;margin-top:10px;">'
 
     popup_css = """
     <style>
