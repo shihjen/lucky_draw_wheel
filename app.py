@@ -164,7 +164,7 @@ else:
 
 # --- Winner History Section ---
 if st.session_state.winners:
-    st.markdown("## 🏆 Winner History")
+    st.markdown("## 🏆 Selected")
     cols = st.columns(min(len(st.session_state.winners), 5))  # up to 5 per row
     for i, winner in enumerate(st.session_state.winners):
         with cols[i % 5]:
