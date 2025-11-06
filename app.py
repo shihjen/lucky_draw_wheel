@@ -84,11 +84,11 @@ with col2:
                 st.warning("No more attendees to spin!")
             else:
                 # Simulate spin visually
-                total_rotation = 0.05 * 360 + random.randint(0, 360)
-                for angle in np.linspace(st.session_state.rotation, st.session_state.rotation + total_rotation, 25):
+                total_rotation = 0.01 * 360 + random.randint(0, 360)
+                for angle in np.linspace(st.session_state.rotation, st.session_state.rotation + total_rotation, 10):
                     fig = draw_wheel(st.session_state.remaining, angle, show_labels=False)
                     wheel_placeholder.pyplot(fig)
-                    time.sleep(0.0005)
+                    time.sleep(0.00001)
                 st.session_state.rotation = (st.session_state.rotation + total_rotation) % 360
 
                 # Select winner based on final angle
