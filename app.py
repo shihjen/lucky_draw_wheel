@@ -8,7 +8,7 @@ import time
 import numpy as np
 
 # --- Streamlit Page Configuration ---
-st.set_page_config(page_title="Lucky Draw Wheel", layout="wide")
+st.set_page_config(page_title="NUP SAS Day 2025", layout="wide")
 st.title("🎡 NUP SAS Day 2025 Lucky Draw")
 st.audio("Walen - Gameboy (freetouse.com).mp3", format="audio/mpeg", autoplay=True, loop=True, width=200)
 
@@ -108,12 +108,12 @@ if st.session_state.show_popup and st.session_state.winner:
     if uploaded_image is not None:
         img_bytes = uploaded_image.read()
         img_base64 = base64.b64encode(img_bytes).decode()
-        image_html = f'<img src="data:image/png;base64,{img_base64}" width="250" style="border-radius:15px;margin-top:10px;">'
+        image_html = f'<img src="data:image/png;base64,{img_base64}" width="500" style="border-radius:15px;margin-top:10px;">'
     else:
         with open("default_img.png", "rb") as f:
             img_bytes = f.read()
             img_base64 = base64.b64encode(img_bytes).decode()
-            image_html = f'<img src="data:image/png;base64,{img_base64}" width="250" style="border-radius:15px;margin-top:10px;">'
+            image_html = f'<img src="data:image/png;base64,{img_base64}" width="500" style="border-radius:15px;margin-top:10px;">'
 
     popup_css = """
     <style>
@@ -133,17 +133,19 @@ if st.session_state.show_popup and st.session_state.winner:
         text-align: center;
         box-shadow: 0 6px 30px rgba(0,0,0,0.25);
         pointer-events: auto;
+        width:800px;
+        height:700px;
         max-width: 1040px;
     }
-    .popup-title { margin: 0 0 6px 0; font-size: 28px; }
-    .popup-name { margin: 6px 0 12px 0; font-size: 22px; color: #2c7be5; }
+    .popup-title { margin: 0 0 6px 0; font-size: 24px; }
+    .popup-name { margin: 6px 0 12px 0; font-size: 50px; font-weight: bold; color: #2c7be5; }
     </style>
     """
 
     popup_html = f"""
     <div class="popup-overlay" id="popup_overlay">
       <div class="popup-box">
-        <div class="popup-title">🎉 Congratulations!</div>
+        <div class="popup-title">🎉 Congratulations 🎉</div>
         <div class="popup-name">{st.session_state.winner}</div>
         {image_html}
       </div>
