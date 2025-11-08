@@ -10,8 +10,7 @@ import numpy as np
 # --- Streamlit Page Configuration ---
 st.set_page_config(page_title="NUP SAS Day 2025", layout="wide")
 st.title("🎡 NUP SAS Day 2025 Lucky Draw")
-st.audio("Walen - Gameboy (freetouse.com).mp3", format="audio/mpeg", autoplay=True, loop=True, width=200)
-
+st.audio("Walen - Gameboy (freetouse.com).mp3", format="audio/mpeg", autoplay=True, loop=True)
 
 # --- Initialize Session States ---
 if "attendees" not in st.session_state:
@@ -42,7 +41,6 @@ if st.sidebar.button("Load Attendees"):
     st.session_state.remaining = names.copy()
     st.session_state.winners = []  # reset winners when reload
     st.sidebar.success(f"Loaded {len(names)} attendees!")
-    
 
 # --- Draw Wheel Function ---
 def draw_wheel(names, rotation=0, show_labels=True):
@@ -72,10 +70,8 @@ def draw_wheel(names, rotation=0, show_labels=True):
 
 # --- Center layout for the wheel ---
 col1, col2, col3 = st.columns([1, 2, 1])
-
 with col2:
     if st.session_state.remaining:
-        # Display wheel (static)
         fig = draw_wheel(st.session_state.remaining, st.session_state.rotation)
         wheel_placeholder = st.pyplot(fig)
 
@@ -86,24 +82,31 @@ with col2:
             if n == 0:
                 st.warning("No more attendees to spin!")
             else:
-                # Simulate spin visually
-                total_rotation = 0.01 * 360 + random.randint(0, 360)
-                for angle in np.linspace(st.session_state.rotation, st.session_state.rotation + total_rotation, 10):
+                # 🎲 True random selection
+                winner = random.choice(st.session_state.remaining)
+                winner_index = st.session_state.remaining.index(winner)
+
+                # 🎡 Determine rotation to land on winner
+                slice_angle = 360 / n
+                target_angle = (360 - (winner_index * slice_angle + slice_angle / 2)) % 360
+                total_rotation = 5 * 360 + target_angle  # spin several rounds then land exactly
+
+                # 🎬 Spin animation
+                for angle in np.linspace(st.session_state.rotation, st.session_state.rotation + total_rotation, 50):
                     fig = draw_wheel(st.session_state.remaining, angle, show_labels=False)
                     wheel_placeholder.pyplot(fig)
-                    time.sleep(0.00001)
+                    time.sleep(0.02)
+
                 st.session_state.rotation = (st.session_state.rotation + total_rotation) % 360
 
-                # Select winner based on final angle
-                winner_index = int(((-st.session_state.rotation) % 360) / (360 / n))
-                winner = st.session_state.remaining[winner_index % n]
+                # 🎉 Announce winner
                 st.session_state.winner = winner
                 st.session_state.remaining.remove(winner)
                 st.session_state.winners.append(winner)
                 st.session_state.show_popup = True
                 st.balloons()
 
-# --- Display Winner Popup ---
+# --- Winner Popup ---
 if st.session_state.show_popup and st.session_state.winner:
     if uploaded_image is not None:
         img_bytes = uploaded_image.read()
@@ -133,11 +136,11 @@ if st.session_state.show_popup and st.session_state.winner:
         text-align: center;
         box-shadow: 0 6px 30px rgba(0,0,0,0.25);
         pointer-events: auto;
-        width:800px;
-        height:700px;
+        width: 800px;
+        height: 700px;
         max-width: 1040px;
     }
-    .popup-title { margin: 0 0 6px 0; font-size: 24px; }
+    .popup-title { margin: 0 0 6px 0; font-size: 30px; }
     .popup-name { margin: 6px 0 12px 0; font-size: 50px; font-weight: bold; color: #2c7be5; }
     </style>
     """
@@ -166,7 +169,7 @@ else:
 
 # --- Winner History Section ---
 if st.session_state.winners:
-    st.markdown("## 🏆 Selected")
+    st.markdown("## 🏆 Selected Winners")
     cols = st.columns(min(len(st.session_state.winners), 5))  # up to 5 per row
     for i, winner in enumerate(st.session_state.winners):
         with cols[i % 5]:
