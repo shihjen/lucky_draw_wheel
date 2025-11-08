@@ -137,7 +137,7 @@ if st.session_state.show_popup and st.session_state.winner:
         box-shadow: 0 6px 30px rgba(0,0,0,0.25);
         pointer-events: auto;
         width: 800px;
-        height: 700px;
+        height: 800px;
         max-width: 1040px;
     }
     .popup-title { margin: 0 0 6px 0; font-size: 30px; }
