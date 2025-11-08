@@ -95,7 +95,7 @@ with col2:
                 for angle in np.linspace(st.session_state.rotation, st.session_state.rotation + total_rotation, 50):
                     fig = draw_wheel(st.session_state.remaining, angle, show_labels=False)
                     wheel_placeholder.pyplot(fig)
-                    time.sleep(0.02)
+                    time.sleep(0.0001)
 
                 st.session_state.rotation = (st.session_state.rotation + total_rotation) % 360
 
