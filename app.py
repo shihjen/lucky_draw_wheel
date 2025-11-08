@@ -92,7 +92,7 @@ with col2:
                 total_rotation = 5 * 360 + target_angle  # spin several rounds then land exactly
 
                 # 🎬 Spin animation
-                for angle in np.linspace(st.session_state.rotation, st.session_state.rotation + total_rotation, 50):
+                for angle in np.linspace(st.session_state.rotation, st.session_state.rotation + total_rotation, 20):
                     fig = draw_wheel(st.session_state.remaining, angle, show_labels=False)
                     wheel_placeholder.pyplot(fig)
                     time.sleep(0.0001)
