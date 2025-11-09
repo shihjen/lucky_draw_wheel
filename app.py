@@ -57,7 +57,7 @@ def draw_wheel(names, rotation=0, show_labels=True):
         wedge = Wedge((0, 0), 1, start, end, facecolor=colors[i % len(colors)], edgecolor="white")
         ax.add_patch(wedge)
 
-        if num > 50:
+        if num > 30:
             label_fontsize = 14
         else:
             label_fontsize = 22
