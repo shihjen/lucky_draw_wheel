@@ -21,35 +21,35 @@ The app features a dynamic wheel built with Matplotlib, a smooth spin animation,
 
 1. Clone the Repository
 
-'''
+```
 git clone [https://github.com/shihjen/lucky_draw/-wheel.git](https://github.com/shihjen/lucky_draw_wheel.git)
 cd your-repo-name
-'''
+```
 
 2. Install Dependencies
 It's highly recommended to use a Python virtual environment.
 
-'''
+```
 # Create a virtual environment (optional but recommended)
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install the required packages
 pip install -r requirements.txt
-'''
+```
 
 You will need to create a requirements.txt file with the following content:
 
-'''
+```
 streamlit
 matplotlib
 numpy
-'''
+```
 
 3. Run the App
 Once your dependencies are installed and local files are in place, run the following command:
 
-'''
+```
 streamlit run app.py
-'''
+```
 
